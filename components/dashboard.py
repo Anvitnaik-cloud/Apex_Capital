@@ -9,31 +9,44 @@ def render_dashboard(data, info, ticker):
 
     price_fig = go.Figure()
     price_fig.add_trace(
-        go.Scatter(x=data["Date"], y=data["Close"], name="Close", line=dict(color="#00bcd4"))
+        go.Scatter(
+            x=data["Date"],
+            y=data["Close"],
+            name="Close",
+            line=dict(color="#7B61FF", width=1),
+        )
     )
-    price_fig.update_layout(height=320, margin=dict(l=20, r=20, t=30, b=20))
+    price_fig.update_layout(
+        template="plotly_dark",
+        height=320,
+        margin=dict(l=20, r=20, t=30, b=20),
+        showlegend=False,
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+    )
+    price_fig.update_xaxes(showgrid=False, showline=False)
+    price_fig.update_yaxes(showgrid=False, showline=True, linecolor="#1E1E1E")
     st.plotly_chart(price_fig, use_container_width=True)
-
-    candle_fig = go.Figure(
-        data=[
-            go.Candlestick(
-                x=data["Date"],
-                open=data["Open"],
-                high=data["High"],
-                low=data["Low"],
-                close=data["Close"],
-                name="Candlestick",
-            )
-        ]
-    )
-    candle_fig.update_layout(height=320, margin=dict(l=20, r=20, t=30, b=20))
-    st.plotly_chart(candle_fig, use_container_width=True)
 
     volume_fig = go.Figure()
     volume_fig.add_trace(
-        go.Bar(x=data["Date"], y=data["Volume"], name="Volume", marker_color="#9fa8da")
+        go.Scatter(
+            x=data["Date"],
+            y=data["Volume"],
+            name="Volume",
+            line=dict(color="#888", width=1),
+        )
     )
-    volume_fig.update_layout(height=240, margin=dict(l=20, r=20, t=30, b=20))
+    volume_fig.update_layout(
+        template="plotly_dark",
+        height=240,
+        margin=dict(l=20, r=20, t=30, b=20),
+        showlegend=False,
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+    )
+    volume_fig.update_xaxes(showgrid=False, showline=False)
+    volume_fig.update_yaxes(showgrid=False, showline=True, linecolor="#1E1E1E")
     st.plotly_chart(volume_fig, use_container_width=True)
 
     rsi = compute_rsi(data["Close"]).iloc[-1]

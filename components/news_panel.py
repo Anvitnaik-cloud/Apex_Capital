@@ -15,8 +15,20 @@ def render_news_panel(ticker, asset_type):
 
     for article in articles:
         sentiment = score_sentiment(article.get("title", ""))
-        st.markdown(f"**{article.get('title', 'Headline')}**")
-        st.caption(f"{article.get('source', 'Source')} | {article.get('published', '')} | Sentiment: {sentiment}")
-        if article.get("url"):
-            st.markdown(f"[Read article]({article['url']})")
-        st.divider()
+        title = article.get("title", "Headline")
+        source = article.get("source", "Source")
+        published = article.get("published", "")
+        url = article.get("url", "")
+
+        link_html = f"<a href='{url}' target='_blank' style='color:#7B61FF; text-decoration:none;'>Read article</a>" if url else ""
+
+        st.markdown(
+            f"""
+            <div class="news-card">
+                <div class="news-title">{title}</div>
+                <div class="news-meta">{source} | {published} | Sentiment: {sentiment}</div>
+                {link_html}
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
