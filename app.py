@@ -59,6 +59,16 @@ st.markdown(
 
     div[data-testid="stFileUploader"] small { display: none; }
 
+    .github-float { position: fixed; top: 96px; right: 48px; z-index: 9999; pointer-events: auto; }
+    .github-link { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border: 1px solid #E6E6E6; border-radius: 8px; background: #FFFFFF; color: #000; text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 0.2px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18); }
+    .github-link:visited { color: #000; }
+    .github-link:hover, .github-link:active, .github-link:focus { background: #FFFFFF; border-color: #E6E6E6; color: #000; }
+    .github-link svg { width: 18px; height: 18px; fill: #0F0F0F; }
+
+    @media (max-width: 640px) {
+        .github-float { top: 80px; right: 28px; }
+    }
+
     .section-divider { height: 1px; background: #1E1E1E; margin: 14px 0; }
     </style>
     """,
@@ -66,6 +76,20 @@ st.markdown(
 )
 
 nav, asset_type, period, horizon, run_models = render_sidebar()
+
+st.markdown(
+    """
+    <div class='github-float'>
+        <a class='github-link' href='https://github.com/Anvitnaik-cloud/Apex_Capital/fork' target='_blank'>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 0.5c-6.63 0-12 5.37-12 12 0 5.3 3.438 9.8 8.207 11.387.6.11.793-.26.793-.577 0-.285-.01-1.04-.016-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.238 1.84 1.238 1.07 1.835 2.807 1.305 3.492.997.108-.776.418-1.305.762-1.605-2.665-.303-5.466-1.332-5.466-5.93 0-1.31.468-2.38 1.236-3.22-.124-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.29-1.552 3.296-1.23 3.296-1.23.655 1.653.243 2.873.12 3.176.77.84 1.234 1.91 1.234 3.22 0 4.61-2.806 5.624-5.479 5.92.43.37.814 1.102.814 2.222 0 1.604-.015 2.896-.015 3.286 0 .32.192.694.8.576 4.765-1.59 8.2-6.086 8.2-11.384 0-6.63-5.37-12-12-12z" />
+            </svg>
+            Fork
+        </a>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 if nav == "Assets":
     st.markdown("<div class='asset-label'>Assets</div>", unsafe_allow_html=True)
